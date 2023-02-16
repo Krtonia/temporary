@@ -7,12 +7,10 @@ repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync 
 source build/envsetup.sh
 lunch evolution_ginkgo-userdebug
 export BUILD_USERNAME=Tejas
-export KBUILD_BUILD_USER=tejas
-export KBUILD_BUILD_HOST=I_Am_Charsi
 export BUILD_HOSTNAME=I_Am_Charsi
-export USER=Tejas
 export TZ=Asia/Kolkata
-mka evolution
+mka evolution && cat out/target/product/ginkgo/evolution_gink*.zip.json
+cat out/target/product/ginkgo/evolution_gink*.zip.json
 
 # upload rom
 rclone copy out/target/product/$(grep unch $CIRRUS_WORKING_DIR/build_rom.sh -m 1 | cut -d ' ' -f 2 | cut -d _ -f 2 | cut -d - -f 1)/*.zip cirrus:$(grep unch $CIRRUS_WORKING_DIR/build_rom.sh -m 1 | cut -d ' ' -f 2 | cut -d _ -f 2 | cut -d - -f 1) -P
